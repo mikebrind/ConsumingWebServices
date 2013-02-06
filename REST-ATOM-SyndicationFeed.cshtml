@@ -1,0 +1,14 @@
+﻿@using System.Xml
+@using System.ServiceModel.Syndication;
+@{
+    Page.Title = "REST example with ATOM using the SyndicationFeed class";
+    var feed = SyndicationFeed.Load(new XmlTextReader("http://search.twitter.com/search.atom?q=webmatrix"));
+}
+
+@foreach (var item in feed.Items) {
+    <p><strong>@item.Authors.First().Name</strong><br />
+        @item.Title<br />
+        <em>@item.PublishDate.ToString("F")</em>
+    </p>
+}
+

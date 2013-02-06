@@ -1,0 +1,14 @@
+﻿@{
+    Page.Title = "REST example with JSON";
+    var client = new WebClient();
+    var json = client.DownloadString("http://search.twitter.com/search.json?q=webmatrix");
+    var search = Json.Decode(json);
+}
+
+@foreach(var result in search.results){
+    <p><strong>@result.from_user (@result.from_user_name)</strong><br />
+        @result.text<br />
+        <em>@DateTime.Parse(result.created_at).ToString("F")</em>
+    </p>
+}
+

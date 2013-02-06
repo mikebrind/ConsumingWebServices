@@ -1,0 +1,18 @@
+﻿@{
+    Page.Title = "Simple SOAP example";
+    var input = Request["input"];
+    var output = string.Empty;
+    if(!input.IsEmpty()){
+        var service = new TempConvertService.TempConvertSoapClient("TempConvertSoap");
+        output = service.CelsiusToFahrenheit(input);
+    }
+}
+<form method="post">
+    @Html.Label("Enter Celsius value: ", "input") 
+    @Html.TextBox("input", input)
+    <input type="submit" />
+</form>
+
+@if(!input.IsEmpty()){
+    <p>@input&deg;C is @output&deg;F</p>
+}

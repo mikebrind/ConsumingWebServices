@@ -1,0 +1,29 @@
+﻿@using System.Xml.Linq;
+@{
+    Page.Title = "SOAP example with XML Fragment";
+    var service = new StockQuoteService.StockQuoteSoapClient("StockQuoteSoap");
+    var fragment = service.GetQuote("MSFT");
+    var xml = XDocument.Parse(fragment);
+    var stockQuote = xml.Descendants("StockQuotes").Descendants("Stock").Select(quote => new { 
+        Symbol = quote.Element("Symbol").Value,
+        Last = quote.Element("Last").Value,
+        Time = quote.Element("Time").Value,
+        Change = quote.Element("Change").Value,
+        Open = quote.Element("Open").Value,
+        Low = quote.Element("Low").Value,
+        Volume = quote.Element("Volume").Value,
+        MktCap = quote.Element("MktCap").Value,
+        PreviousClose = quote.Element("PreviousClose").Value,
+        PercentageChange = quote.Element("PercentageChange").Value,
+        AnnRange = quote.Element("AnnRange").Value,
+        Earns = quote.Element("Earns").Value,
+        PE = quote.Element("P-E").Value,
+        Name = quote.Element("Name").Value
+    }).FirstOrDefault();
+}
+<h2>@stockQuote.Name (@stockQuote.Symbol)</h2> 
+<p>
+    Last: @stockQuote.Last<br />
+    Change: @stockQuote.Change<br />
+    Volume: @stockQuote.Volume
+</p>

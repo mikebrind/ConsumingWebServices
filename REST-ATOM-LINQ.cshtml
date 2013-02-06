@@ -1,0 +1,18 @@
+﻿@using System.Xml.Linq
+@{
+    Page.Title = "REST Example With ATOM And LINQ";
+    var feed = XDocument.Load("http://search.twitter.com/search.atom?q=webmatrix");
+    XNamespace xmlns = "http://www.w3.org/2005/Atom";
+    var items = feed.Descendants(xmlns + "entry").Select(item => new {
+        Title = item.Element(xmlns + "title").Value,
+        Published = item.Element(xmlns + "published").Value,
+        Author = item.Element(xmlns + "author").Element(xmlns + "name").Value
+    });
+}
+
+@foreach (var item in items) {
+    <p><strong>@item.Author</strong><br />
+        @item.Title<br />
+        <em>@DateTime.Parse(item.Published).ToString("F"))</em>
+    </p>
+}

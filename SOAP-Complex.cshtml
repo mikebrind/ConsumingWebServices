@@ -1,0 +1,14 @@
+﻿@{
+    Page.Title = "SOAP Example With Complex Object";
+    var service = new WeatherService.WeatherSoapClient("WeatherSoap");
+    var forecast = service.GetCityForecastByZIP("98052");
+}
+
+<h2>Weather for @forecast.City</h2>
+@foreach(var day in forecast.ForecastResult){
+    <p>
+        @day.Date.ToString("D")<br />
+        @day.Desciption<br />
+        High: @day.Temperatures.DaytimeHigh&deg;F
+    </p>
+}

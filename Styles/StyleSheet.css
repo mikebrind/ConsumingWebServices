@@ -1,0 +1,24 @@
+body {
+    font-family: Verdana;
+    font-size: 0.8em;
+}
+
+.menu{
+    float: left;
+    width: 150px;
+    font-family: 'Microsoft Sans Serif';
+    
+}
+
+.thread {
+    padding-top: 15px;
+}
+
+a {
+    color:  #0000ff;
+}
+
+#home{
+    clear: both;
+    margin-top:  20px;
+}
